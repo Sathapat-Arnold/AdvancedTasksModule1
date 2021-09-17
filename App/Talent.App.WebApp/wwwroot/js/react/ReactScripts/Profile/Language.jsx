@@ -103,7 +103,7 @@ export class EditLanguage extends React.Component {
             formValid: isEdit
         };
         this.handleNameChange = this.handleNameChange.bind(this);
-        this.handleLeveChange = this.handleLeveChange.bind(this);
+        this.handleLevelChange = this.handleLevelChange.bind(this);
         this.setNewValue = this.setNewValue.bind(this);
         this.validateField = this.validateField.bind(this);
     };
@@ -112,7 +112,7 @@ export class EditLanguage extends React.Component {
         this.setNewValue({ [event.target.name]: event.target.value });
     };
 
-    handleLeveChange(event, { name, value }) {
+    handleLevelChange(event, { name, value }) {
         this.setNewValue({ [name]: value });
     };
 
@@ -184,7 +184,7 @@ export class EditLanguage extends React.Component {
                             name="level"
                             search={true}
                             options={languageLevels}
-                            onChange={this.handleLeveChange}
+                            onChange={this.handleLevelChange}
                             value={this.state.newContact.level}
                             placeholder="Select language level"
                             onFocus={e => { e.target.setAttribute("autocomplete", "nope"); }}
