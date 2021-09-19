@@ -1,4 +1,4 @@
-﻿using Talent.Common.Contracts;
+using Talent.Common.Contracts;
 using Talent.Common.Models;
 using Talent.Services.Profile.Domain.Contracts;
 using Talent.Services.Profile.Models.Profile;
@@ -106,6 +106,7 @@ namespace Talent.Services.Profile.Domain.Services
 
         public async Task<TalentProfileViewModel> GetTalentProfile(string Id)
         {
+            
             User profile = (await _userRepository.GetByIdAsync(Id));
 
             if (profile != null)
@@ -159,6 +160,7 @@ namespace Talent.Services.Profile.Domain.Services
                     Certifications = certifications,
                     Experience = experience
                 };
+                
                 return result;
             }
             return null;
@@ -276,6 +278,9 @@ namespace Talent.Services.Profile.Domain.Services
             {
                 var experience = user.Experience.SingleOrDefault(x => x.Id == item.Id);
                 if (experience == null) experience = new UserExperience { Id = ObjectId.GenerateNewId().ToString() };
+                if (String.IsNullOrWhiteSpace(item.Company)) return "Please enter company name.";
+                if (String.IsNullOrWhiteSpace(item.Position)) return "Please enter position name.";
+                if (String.IsNullOrWhiteSpace(item.Responsibilities)) return "Please enter responsibilities.";
                 experience.UserId = user.Id;
                 experience.IsDeleted = false;
                 experience.Company = item.Company;
